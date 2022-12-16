@@ -1,0 +1,130 @@
+---
+title: "FP - DiD: Moser and Voena (2012) [100 Points]"
+subtitle: "ECON 474 Econometrics of Policy Evaluation"
+author: "FirstName LastName"
+output: 
+  html_document:
+    toc: yes
+    toc_float: true
+    number_sections: true
+    theme: cerulean
+    highlight: pygments
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+# **[30 Points]** Research Design
+********************************************************************************
+
+This section is centered around understanding the research design for this paper.
+
+## **[10 Points]** Research Question
+************************************************************
+
+What is the research question of this paper?
+
+*Hint: economists are notorious for not explicitly stating their research question in their papers.*
+
+**Your answer:**
+
+
+
+## **[20 Points]** Empirical Design
+************************************************************
+
+1. What is the casual technique of this paper, and why is it chosen?
+
+**Your answer:**
+
+
+2. Name one possible threat to identification.
+
+**Your answer:**
+
+
+# **[70 Points]** Replication
+********************************************************************************
+
+The paper estimates the regression:
+
+$$PatentsByUSInventors_{c,t} = \alpha_t + \alpha_c + \delta(TREAT \times postTWEA)_{c,t} + \gamma X_{c,t} + \epsilon_{c,t}$$
+
+where $t$ is patent subclass and $c$ is patent subclass. 
+Since the data are at the patent-level and not the patent subclass-level, your will need to **cluster the standard errors.**
+
+The mapping of the variables in the regression to the data are:
+
+- $c$ - `class_id` (subclass)
+- $t$ - `grntyr` (year)
+- $PatentsByUSInventors_{c,t}$ - `count_usa`
+- $TREAT_c$ - `licensed_subclass`
+- $postTWEA_t$ - `grntyr >= 1919` (not in the data set)
+- $(TREAT \times postTWEA)_{c,t}$ - `treat`
+- $X_{c,t}$ - `count_for` (number of patents by foreign investors)
+
+*Note:* `treat` *does not map perfectly to* `licensed_subclass` $\times$ `(grntyr >= 1919)` *due to the restriction that the subclass has at least one enemy-owned patent.*
+
+
+**[5 Points]** Load in the data and any necessary packages:
+
+```{r loading please wait}
+
+```
+
+
+## **[30 Points]** Main Results: Table 2 Columns 1 and 2
+************************************************************
+
+Using `treat`, replicate columns 1 and 2 from table 2 in an `etable()`.
+Rename all variables appropriately (recall you cannot rename the cluster variable).
+Specify the `fitstat` argument appropriately.
+Use the `extralines` argument of the `etable()` to:
+
+1. Add any missing elements
+2. Add the effect size following the papers methodology
+    - *Hint: follow the paper by obtaining the* $\delta$ *coefficients and then divide them by average* `count_usa` *for the __post__ treatment period.*
+
+
+```{r tab2}
+
+```
+
+
+
+## **[35 Points]** Event Study - Figure 4
+************************************************************
+
+Figure 4 of the paper is specified in a way that does not transparently show parallel pre-trends (as you will see soon).
+We are going to correct it. 
+
+Produce a corrected event study figure that follows what we have done in class with appropriately labelled axes and title with a vertical line for the event date (1919) and a horizontal line at zero.
+Your regression will need to control for `count_for`.
+
+**Hints:**
+
+- This time don't use `treat`. Instead use `licensed_class` and `grntyr`. 
+- Create a variable `year_factor` that has a base year of 1919
+- use `geom_ribbon()` instead of `geom_errorbar()` for a cleaner figure
+
+
+```{r event study}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

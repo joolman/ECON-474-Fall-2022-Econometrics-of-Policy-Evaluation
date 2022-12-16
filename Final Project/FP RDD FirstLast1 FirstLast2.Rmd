@@ -1,0 +1,135 @@
+---
+title: "FP - RDD: Reimers (2019) [100 Points]"
+subtitle: "ECON 474 Econometrics of Policy Evaluation"
+author: "FirstName LastName"
+output: 
+  html_document:
+    toc: yes
+    toc_float: true
+    number_sections: true
+    theme: cerulean
+    highlight: pygments
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+# **[30 Points]** Research Design
+********************************************************************************
+
+This section is centered around understanding the research design for this paper.
+
+## **[10 Points]** Research Question
+************************************************************
+
+What is the research question of this paper?
+
+*Hint: economists are notorious for not explicitly stating their research question in their papers.*
+
+**Your answer:**
+
+
+
+## **[20 Points]** Empirical Design
+************************************************************
+
+1. What is the casual technique of this paper, and why is it chosen?
+
+**Your answer:**
+
+
+2. Name one possible threat to identification.
+
+**Your answer:**
+
+
+# **[70 Points]** Replication
+********************************************************************************
+
+The paper estimates the regression:
+
+$$y_j = \delta 1\{IP =1\} + k(year_j) + X_j \beta + \epsilon_j$$
+
+where $j$ is the specific book title (e.g. Gone with the Wind).
+
+The mapping of the variables in the regression to the data are:
+
+- $y_j$
+    - `ntitle` - number of in-print editions per title
+    - `ntitleformat` - number of in-print editions per title for each format (e.g. hardcover, paperback, e-book)
+- $1\{IP =1\}$ - `post1923` (publication year $\geq$ 1923)
+- $k(year_j)$ - a third degree polynomial of `year`
+- $X_j$
+    - `plr` - British Public Library Demand (checkouts)
+    - `prize_author` - Author is a Pulitzer Prize winner
+    - `canon_title` - Book listed in Harold  Bloom's Western Canon: The Books and School of the Ages
+    - `canon_author` - Author listed in Harold  Bloom's Western Canon: The Books and School of the Ages
+
+Additionally, there is a variable `format` that lists the formats in which the book is published.
+
+
+**[5 Points]** Load in the data and any necessary packages:
+
+```{r loading please wait}
+
+```
+
+*Note: if you are still confused what this paper is analyzing, go to Amazon and search for the Wealth of Nations. There are __many__ different versions of the same book. This is not the case for a book that has been published recently.*
+
+## **[30 Points]** Main Results: Table 2
+************************************************************
+
+The regressions in table 2 only consider `year`s that are $\geq$ -8 years before the cutoff and $\leq$ 7 years after the cutoff.
+All regressions cluster on the `year` of publication variable.
+The column specific details are:
+
+1. outcome `ntitle` on the additional subset of `"Hardcover"` `format`s
+2. outcome `ntitleformat` on the additional subset of `"Hardcover"` `format`s
+3. outcome `ntitleformat` on the additional subset of `"Paperback"` `format`s
+4. outcome `ntitleformat` on the additional subset of `"E-book"` `format`s
+
+Replicate table 2 in an `etable()`.
+Rename all variables appropriately (recall you cannot rename the cluster variable).
+Specify the `fitstat` argument appropriately.
+Use the `extralines` argument of the `etable()` to:
+
+1. Add any missing elements
+2. Add the effect size following the papers methodology
+    - *Hint: Obtain the* $delta$s *and then divide them by the __pre-cutoff__ averages of the outcome variables for the __subsample that matches the regressions__.*
+    
+*Note: the coefficients on the polynomial and the intercept will be different than the paper but the rest will be the same.*
+
+```{r tab2}
+
+```
+
+
+
+## **[35 Points]** RDD Plot - Figure 1
+************************************************************
+
+
+Replicate Figure 1 with appropriately labelled axes and title, which uses a third-order polynomial on each side of the cutoff on the outcome `ntitle`. 
+Do not remove the standard error from the fitted line.
+
+*Hint: create another data frame that is aggregated at the annual level, and adjust the* `year` *variable.*
+
+*Note: the figure will not be identical but will be close to the one in the paper.*
+
+```{r RDD figure}
+
+```
+
+
+
+
+
+
+
+
+
+
+
